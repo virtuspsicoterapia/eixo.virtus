@@ -11,25 +11,7 @@ export default async function PaginaEntrar({
     <main className="tela-entrar">
       <div className="marca">
         <div className="selo">
-          <svg viewBox="0 0 100 100" fill="none">
-            <path
-              d="M50 12 C30 12 14 28 14 50 C14 72 30 88 50 88 C42 80 37 66 37 50 C37 34 42 20 50 12 Z"
-              fill="#C9A961"
-              opacity="0.9"
-            />
-            <g transform="translate(50,50)">
-              <circle r="9" fill="#0B1422" stroke="#C9A961" strokeWidth="1.5" />
-              <g stroke="#C9A961" strokeWidth="1.4" strokeLinecap="round">
-                <line x1="0" y1="-13" x2="0" y2="-20" />
-                <line x1="9.2" y1="-9.2" x2="14.5" y2="-14.5" />
-                <line x1="13" y1="0" x2="20" y2="0" />
-                <line x1="9.2" y1="9.2" x2="14.5" y2="14.5" />
-                <line x1="0" y1="13" x2="0" y2="20" />
-                <line x1="-9.2" y1="9.2" x2="-14.5" y2="14.5" />
-                <line x1="-9.2" y1="-9.2" x2="-14.5" y2="-14.5" />
-              </g>
-            </g>
-          </svg>
+          <img src="/icons/icon-192.png" alt="Eixo — por Virtus Psicoterapia" style={{ width: '100%', height: '100%', borderRadius: 16 }} />
         </div>
         <h1 className="wordmark">Eixo</h1>
         <p className="wordmark-sub">por Virtus Psicoterapia</p>

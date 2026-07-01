@@ -13,7 +13,7 @@ const opcoesHumor: { valor: Humor; rotulo: string }[] = [
   { valor: 'em_paz', rotulo: 'Em paz' },
 ]
 
-export default function FormularioNovaEntrada() {
+export default function FormularioNovaEntrada({ ehPaciente }: { ehPaciente: boolean }) {
   const router = useRouter()
   const [humor, setHumor] = useState<Humor | null>(null)
   const [compartilhar, setCompartilhar] = useState(false)
@@ -65,21 +65,23 @@ export default function FormularioNovaEntrada() {
           autoFocus
         />
 
-        <div className="share-toggle">
-          <div>
-            <div className="t">Compartilhar com Julismar</div>
-            <div className="s">Ele só verá esta entrada se você ativar. Pode mudar depois.</div>
+        {ehPaciente && (
+          <div className="share-toggle">
+            <div>
+              <div className="t">Compartilhar com Julismar</div>
+              <div className="s">Ele só verá esta entrada se você ativar. Pode mudar depois.</div>
+            </div>
+            <button
+              type="button"
+              className={`switch ${compartilhar ? 'on' : ''}`}
+              onClick={() => setCompartilhar(!compartilhar)}
+              aria-pressed={compartilhar}
+              aria-label="Compartilhar esta entrada com o terapeuta"
+            >
+              <div className="knob" />
+            </button>
           </div>
-          <button
-            type="button"
-            className={`switch ${compartilhar ? 'on' : ''}`}
-            onClick={() => setCompartilhar(!compartilhar)}
-            aria-pressed={compartilhar}
-            aria-label="Compartilhar esta entrada com o terapeuta"
-          >
-            <div className="knob" />
-          </button>
-        </div>
+        )}
       </div>
     </div>
   )

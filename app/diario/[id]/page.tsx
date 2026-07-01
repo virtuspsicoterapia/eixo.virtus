@@ -13,14 +13,23 @@ export default async function PaginaDetalheEntrada({
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) redirect('/entrar')
 
-  const { data: entrada } = await supabase
-    .from('entradas_diario')
-    .select('*')
-    .eq('id', id)
-    .eq('usuario_id', user.id)
-    .single<EntradaDiario>()
+  const [{ data: entrada }, { data: perfil }] = await Promise.all([
+    supabase
+      .from('entradas_diario')
+      .select('*')
+      .eq('id', id)
+      .eq('usuario_id', user.id)
+      .single<EntradaDiario>(),
+    supabase
+      .from('perfis')
+      .select('tipo')
+      .eq('id', user.id)
+      .single(),
+  ])
 
   if (!entrada) notFound()
 
-  return <DetalheEntrada entrada={entrada} />
+  const ehPaciente = perfil?.tipo === 'paciente_ativo'
+
+  return <DetalheEntrada entrada={entrada} ehPaciente={ehPaciente} />
 }

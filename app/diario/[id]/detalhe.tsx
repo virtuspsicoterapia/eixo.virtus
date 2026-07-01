@@ -13,7 +13,7 @@ const rotuloHumor: Record<string, string> = {
   em_paz: 'Em paz',
 }
 
-export default function DetalheEntrada({ entrada }: { entrada: EntradaDiario }) {
+export default function DetalheEntrada({ entrada, ehPaciente }: { entrada: EntradaDiario; ehPaciente: boolean }) {
   const router = useRouter()
   const [compartilhar, setCompartilhar] = useState(entrada.compartilhada)
   const [salvando, setSalvando] = useState(false)
@@ -59,22 +59,24 @@ export default function DetalheEntrada({ entrada }: { entrada: EntradaDiario }) 
           {entrada.conteudo}
         </p>
 
-        <div className="share-toggle">
-          <div>
-            <div className="t">Compartilhar com Julismar</div>
-            <div className="s">Ele só verá esta entrada se você ativar. Pode mudar a qualquer momento.</div>
+        {ehPaciente && (
+          <div className="share-toggle">
+            <div>
+              <div className="t">Compartilhar com Julismar</div>
+              <div className="s">Ele só verá esta entrada se você ativar. Pode mudar a qualquer momento.</div>
+            </div>
+            <button
+              type="button"
+              className={`switch ${compartilhar ? 'on' : ''}`}
+              onClick={aoAlternar}
+              disabled={salvando}
+              aria-pressed={compartilhar}
+              aria-label="Compartilhar esta entrada com o terapeuta"
+            >
+              <div className="knob" />
+            </button>
           </div>
-          <button
-            type="button"
-            className={`switch ${compartilhar ? 'on' : ''}`}
-            onClick={aoAlternar}
-            disabled={salvando}
-            aria-pressed={compartilhar}
-            aria-label="Compartilhar esta entrada com o terapeuta"
-          >
-            <div className="knob" />
-          </button>
-        </div>
+        )}
       </div>
     </div>
   )
